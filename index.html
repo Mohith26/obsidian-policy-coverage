@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Runtime security · Coverage · Obsidian</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail">
+      <div class="logo" title="Obsidian">
+        <svg viewBox="0 0 40 40" width="34" height="34"><circle cx="20" cy="20" r="19" fill="#3b7de9"/><circle cx="20" cy="20" r="11.5" fill="none" stroke="#fff" stroke-width="2.4"/><circle cx="20" cy="20" r="4" fill="#fff"/><path d="M20 4.5v7M20 28.5v7M4.5 20h7M28.5 20h7" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+      </div>
+      <button class="rail-expand" aria-label="Expand">»</button>
+      <nav>
+        <a title="Home"><i data-lucide="house"></i></a>
+        <a title="Integrations"><i data-lucide="cable"></i></a>
+        <a title="Search"><i data-lucide="search"></i></a>
+        <span class="sep"></span>
+        <a title="Threats"><i data-lucide="triangle-alert"></i></a>
+        <a title="Posture"><i data-lucide="shield-check"></i></a>
+        <a title="AI agents"><i data-lucide="bot"></i></a>
+        <a class="active" title="Runtime security"><i data-lucide="shield-half"></i></a>
+        <a title="Apps"><i data-lucide="puzzle"></i></a>
+        <a title="Browser"><i data-lucide="monitor-check"></i></a>
+        <span class="sep"></span>
+        <a title="Workflows"><i data-lucide="git-compare-arrows"></i></a>
+        <span class="sep"></span>
+        <a title="Dashboards"><i data-lucide="layout-grid"></i></a>
+        <a title="Reports"><i data-lucide="file-text"></i></a>
+        <a title="Exports"><i data-lucide="download"></i></a>
+        <a title="Tasks"><i data-lucide="list-checks"></i></a>
+      </nav>
+      <a class="rail-bottom" title="Support"><i data-lucide="headset"></i></a>
+    </aside>
+
+    <main class="main">
+      <h1>Runtime security</h1>
+      <div class="tabs">
+        <a>Events</a><a>Policies</a><a>Exceptions</a><a class="active">Coverage <span class="new">New</span></a>
+      </div>
+      <div class="searchbar"><i data-lucide="list-filter"></i><input placeholder="Search agents, connections, policies" aria-label="Search" id="search" /></div>
+
+      <div class="cards">
+        <section class="card">
+          <h3>Policy bypass paths</h3>
+          <p class="sub">Agent actions a runtime policy targets that reach the app without passing any enforcement point</p>
+          <div class="big" id="kBypass"></div>
+          <div class="mini-tabs" data-for="tblA"><a class="active" data-mode="policy">By policy</a><a data-mode="route">By route</a></div>
+          <table class="mini" id="tblA"></table>
+        </section>
+        <section class="card">
+          <h3>Would-be blocks that went through</h3>
+          <p class="sub" id="subThrough"></p>
+          <div class="big" id="kThrough"></div>
+          <div class="mini-tabs" data-for="tblB"><a class="active" data-mode="agent">By agent</a><a data-mode="policy">By policy</a></div>
+          <table class="mini" id="tblB"></table>
+        </section>
+        <section class="card">
+          <h3>Closure plan</h3>
+          <p class="sub">Lowest-cost set of changes that leaves zero bypass paths, from a max-flow / min-cut over the Knowledge Graph</p>
+          <div class="big" id="kPlan"></div>
+          <div class="mini-tabs"><a class="active">Changes</a></div>
+          <table class="mini" id="tblC"></table>
+        </section>
+      </div>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div><h3>Policy coverage by enforcement point</h3><p class="sub">Paths each policy targets, split by the route the agent's connection takes. Red cells reach the app ungoverned.</p></div>
+          <div class="legend"><span class="lg ok"></span>Governed <span class="lg bad"></span>Bypass <span class="lg part"></span>Block-only route, policy needs approval</div>
+        </div>
+        <table class="matrix" id="matrix"></table>
+      </section>
+
+      <section class="split">
+        <aside class="facets">
+          <div class="facets-head"><b>Facets</b><i data-lucide="chevrons-up"></i></div>
+          <div id="facets"></div>
+        </aside>
+        <div class="table-wrap">
+          <div class="table-tools"><a class="hide-facets"><i data-lucide="chevrons-left"></i> Hide facets</a><span id="rowCount"></span>
+            <div class="seg" id="viewSeg"><a class="active" data-view="paths">Bypass paths</a><a data-view="through">Went through (30d)</a></div></div>
+          <table class="grid" id="grid"></table>
+        </div>
+      </section>
+
+      <section class="panel" id="planPanel">
+        <div class="panel-head">
+          <div><h3>Closure plan</h3><p class="sub" id="planSub"></p></div>
+          <div class="weight"><label for="w">Cost of breaking a legitimate action</label><input type="range" id="w" min="0" max="1" step="0.05" /><span id="wVal"></span></div>
+        </div>
+        <table class="grid plan" id="planTable"></table>
+        <div class="plan-foot" id="planFoot"></div>
+      </section>
+
+      <footer class="footer">Unofficial concept demo by Mohith Gajjela. Not affiliated with Obsidian Security. Synthetic data.</footer>
+    </main>
+  </div>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="data/data.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

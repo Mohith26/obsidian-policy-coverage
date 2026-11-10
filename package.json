@@ -1,0 +1,1 @@
+{"name":"obsidian-policy-coverage","private":true,"type":"module","scripts":{"test":"node --test test/coverage.test.mjs","generate":"node scripts/generate.mjs"}}

@@ -1,0 +1,33 @@
+{
+ "people": 36,
+ "agents": 14,
+ "connections": 25,
+ "resources": 18,
+ "events": 8412,
+ "paths": 224,
+ "bypass": 144,
+ "violating": 491,
+ "through": 111,
+ "enforced": 380,
+ "plan": {
+  "fixes": [
+   "govern:c22",
+   "scope:c20|grant_admin",
+   "invoke:u35>ag11",
+   "scope:c3|export",
+   "govern:c7",
+   "govern:c10",
+   "scope:c11|export",
+   "govern:c14",
+   "scope:c16|export",
+   "scope:c4|share_external",
+   "scope:c5|share_external",
+   "scope:c8|share_external",
+   "scope:c23|share_external",
+   "scope:c24|share_external"
+  ],
+  "total": 40.25,
+  "lower": 21.25
+ },
+ "bypassAfter": 0
+}
